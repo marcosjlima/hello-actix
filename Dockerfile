@@ -5,6 +5,7 @@ FROM rust:alpine as builder
 
 RUN apk update 
 RUN apk add --no-cache musl-dev
+RUN apk add --no-cache libpq
 
 WORKDIR /usr/src/hello-actix
 

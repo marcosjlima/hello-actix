@@ -1,35 +1,25 @@
+use crate::schema::*;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Queryable)]
 pub struct User {
-    pub id: i32,
-    pub first_name: String,
-    pub last_name: String,
+    pub id: i64,
     pub email: String,
-    pub created_at: chrono::NaiveDateTime,
+    pub nome: String,
+    pub password: String,
 }
 
-impl User {
-    pub fn new(
-        id: i32, first_name: String, last_name: String,
-        email: String, created_at: chrono::NaiveDateTime,
-    ) -> User {
-        User { id, first_name, last_name, email, created_at }
-    }
-}
-
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Insertable, Debug)]
+#[table_name = "tb_user"]
 pub struct NewUser<'a> {
-    pub first_name: &'a str,
-    pub last_name: &'a str,
     pub email: &'a str,
-    pub created_at: chrono::NaiveDateTime,
+    pub nome: &'a str,
+    pub password: &'a str,
 }
-
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct InputUser {
-    pub first_name: String,
-    pub last_name: String,
     pub email: String,
+    pub nome: String,
+    pub password: String,
 }
